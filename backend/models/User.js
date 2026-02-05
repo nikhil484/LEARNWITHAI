@@ -38,9 +38,9 @@ const userSchema= new mongoose.Schema({
 
 //hash password before saving
 
-UserSchema.pre('save',async function(next) {
+userSchema.pre('save',async function() {
     if(!this.isModified('password')){
-        next()
+       return 
     }
     //without salt password123 → same hash everywhere
     //with salt password123 → different hash for each user
@@ -50,7 +50,7 @@ UserSchema.pre('save',async function(next) {
 })
 
 
-UserSchema.methods.matchPassword= async function(enteredPassword){
+userSchema.methods.matchPassword= async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password)
 }
 

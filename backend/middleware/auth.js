@@ -25,8 +25,37 @@ const protect= async(req,res,next)=>{
             next()
 
         } catch (error) {
-            
+            console.error('Auth middleware error:',error.message)
+            if(error.name==='TokenExpiredError'){
+                return res
+                .status(401)
+                .json({
+                    success:false,
+                    error:"Token has expired",
+                    statusCode:401
+
+                })
+            }
+            return res
+            .status(401)
+            .json({
+                success:false,
+                error:'Not authorized ,token failed',
+                statusCode:401
+            })
         }
     }
 
+    if(!token){
+        return res
+        .status(401)
+        .json({
+            success:false,
+            error:'Not authorized, no token',
+            statusCode:401
+        })
+    }
+
 }
+
+export default protect
