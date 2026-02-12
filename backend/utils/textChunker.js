@@ -125,7 +125,7 @@ export const findRelevantChunks = (chunks, query, maxChunks = 3) => {
     .split(/\s+/)
     .filter(w=>w.length>2 && !stopWords.has(w))
 
-    if(qweryWords.length===0){
+    if(queryWords.length===0){
         //return clean chunks pbjects without mongoose metadata
         return chunks.slice(0,maxChunks).map(chunk=>({
           content:chunk.content,
