@@ -6,7 +6,6 @@ import{
     chat,
     explainConcept,
     getChatHistory
-
 } from '../controllers/aiController.js'
 
 import protect from '../middleware/auth.js'
