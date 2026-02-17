@@ -42,7 +42,7 @@ export const generateFlashcards= async(text,count=10)=>{
                 if(line.startsWith('Q:')){
                     question=line.substring(2).trim()
                 }else if(line.startsWith('A:')){
-                    answer:line.substring(2).trim()
+                    answer=line.substring(2).trim()
                 }else if(line.startsWith('D:')){
                     const diff= line.substring(2).trim().toLowerCase()
                     if(['easy','medium','hard'].includes(diff)){
@@ -145,3 +145,44 @@ export const generateSummary= async(text)=>{
     }
 }
 
+export const chatWithContext=async(question,chunks)=>{
+    const context= chunks.map((c,i)=>`[Chunk ${i+1}]\n${c.context}`).join('\n\n')
+    const prompt=`Based on the following context from a document ,Analyse the context and answer the user's questions
+    .If the answer is not in the context , say so 
+    
+ Context:${context} 
+ Question:${question}
+ Answer:`
+ try {
+     const response= await ai.models.generateContent({
+            model:"gemini-3-flash-preview",
+            contents:prompt
+        })
+        const generatedText= response.text
+        return generatedText
+ } catch (error) {
+    console.error('Gemini API error',error)
+    throw new Error('Failed to process chat request')
+ }
+}
+
+export const explainConcept= async(concept,context)=>{
+    const prompt= `Explain the concept of "${concept}"based on the following context. 
+    Provide a clear, educational explanation that's easy to understand.
+    Include examples if relevant
+    
+    Context:${context.substring(0,10000)}`
+    try {
+         const response= await ai.models.generateContent({
+            model:"gemini-3-flash-preview",
+            contents:prompt
+        })
+        const generatedText= response.text
+        return generatedText
+        
+    } catch (error) {
+        console.error('Gemini Api Error',error)
+        throw new Error('Failed to explain concept')
+        
+    }
+}
