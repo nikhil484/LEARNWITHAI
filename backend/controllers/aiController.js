@@ -115,7 +115,47 @@ export const  generateQuiz= async(req,res,next)=>{
 
 export const  generateSummary= async(req,res,next)=>{
     try {
-        
+        const{documentId}=req.body
+        if(!documentId){
+            return res
+            .status(400)
+            .json({
+                success:false,
+                message:'Please provide document id ',
+                statusCode:400
+            })
+        }
+        const document= await Document.findOne({
+            _id:documentId,
+            userId:req.user._id,
+            status:"ready"
+        })
+
+        if(!document){
+          return res
+            .status(404)
+            .json({
+                success:false,
+                message:'Document not found or not ready ',
+                statusCode:404
+            })  
+        }
+
+        //generate sumary
+        const summary= await geminiService.generateSummary(
+            document.extractedText
+        )
+
+       res.status(200).json({
+        success:true,
+        data:{
+            documentId:document._id,
+            title:document.title,
+            summary
+        },
+        message:'Summary Generated successfully'
+       })
+
     } catch (error) {
         next(error)
     }
@@ -123,7 +163,80 @@ export const  generateSummary= async(req,res,next)=>{
 
 export const chat = async(req,res,next)=>{
     try {
-        
+        const{documentId,question}=req.body
+        if(!documentId || !question){
+            return res
+            .status(400)
+            .json({
+                success:false,
+                message:'Please provide documentId and questions',
+                statusCode:400
+            })
+
+        }
+    
+    const document = await Document.findOne({
+        _id:documentId,
+        userId:req.user._id,
+        status:'ready'
+    })
+
+    if(!document){
+        return res
+        .status(404)
+        .json({
+            success:false,
+            error:'Document not found not ready',
+            statusCode:404
+        })
+    }
+
+    const releventChunks= findRelevantChunks(document.chunks,question,3)
+    const chunkIndices= releventChunks.map(c=>c.chunkIndex)
+
+    let chatHistory= await ChatHistory.findOne({
+        userId:req.user._id,
+        documentId:document._id,
+
+    })
+    if(!chatHistory){
+        chatHistory=await ChatHistory.create({
+            userId:req.user._id,
+            documentId:document._id,
+            messages:[]
+        })
+    }
+      //generate response using gemini
+    const answer= await geminiService.chatWithContext(question,releventChunks)
+
+    //save convo
+
+    chatHistory.messages.push({
+        role:'user',
+        content:question,
+        timestamp: new Date(),
+        relevantChunks:[]
+    },
+    {
+        role:'assistant',
+        content:answer,
+        timestamp: new Date(),
+        relevantChunks:chunkIndices
+    }
+    
+)
+
+await ChatHistory.save()
+res.status(200).json({
+    success:true,
+    data:{
+     question,
+     answer,
+     relevantChunks:chunkIndices,
+     chatHistoryId:chatHistory._id
+    },
+    message:'Response generated successfully'
+})
     } catch (error) {
         next(error)
     }
