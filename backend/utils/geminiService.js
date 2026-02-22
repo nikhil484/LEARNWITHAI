@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 import { GoogleGenAI } from '@google/genai'
-import { text } from 'express'
 dotenv.config()
 
 const ai= new GoogleGenAI({apiKey:process.env.GEMINI_API_KEY})
@@ -26,7 +25,7 @@ export const generateFlashcards= async(text,count=10)=>{
         })
 
         const generatedText= response.text
-        console.log(response)
+        console.log(generatedText)
 
         //parse response 
         const flashcards=[]
