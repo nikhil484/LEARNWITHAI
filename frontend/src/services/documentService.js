@@ -19,7 +19,12 @@ const getDocuments= async()=>{
         const response= await axiosInstance.get(API_PATHS.DOCUMENTS.GET_DOCUMENTS)
          return response.data?.data
     } catch (error) {
-               throw error.response?.data || {message:'Failed to fetch document'} 
+          // Add this to see the REAL error
+        console.log('Status:', error.response?.status)
+        console.log('Message:', error.response?.data)
+        console.log('Full error:', error)
+        throw error.response?.data || { message: 'Failed to fetch document' }
+    
 
     }
 }
@@ -33,7 +38,7 @@ const deleteDocument= async(id)=>{
     }
 }
 
-const getDocumentById= async()=>{
+const getDocumentById= async(id)=>{
     try {
         const response= await axiosInstance.get(API_PATHS.DOCUMENTS.GET_DOCUMENT_BY_ID(id))
         return response.data

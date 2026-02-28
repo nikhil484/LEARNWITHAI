@@ -100,6 +100,14 @@ export const getDocuments = async (req, res, next) => {
 
                 }
             },
+             {
+                $lookup: {                        // ✅ Add missing quizzes lookup
+                    from: 'quizzes',
+                    localField: '_id',
+                    foreignField: 'documentId',
+                    as: 'quizzes'
+                }
+            },
             {
                 $addFields: {
                     flashcardCount: { $size: '$flashcardSets' },
@@ -127,7 +135,7 @@ export const getDocuments = async (req, res, next) => {
                 data: documents
             })
     } catch (error) {
-
+     next(error)
     }
 }
 
