@@ -3,8 +3,8 @@ import { extractTextFromPDF } from '../utils/pdfParser.js'
 import { chunkText } from '../utils/textChunker.js'
 import fs from 'fs/promises'
 import mongoose from "mongoose"
-
-
+import Flashcard from '../models/Flashcard.js'
+import Quiz from '../models/Quiz.js'
 //upload pfd doc
 //route POST/api/document/upload 
 // private
