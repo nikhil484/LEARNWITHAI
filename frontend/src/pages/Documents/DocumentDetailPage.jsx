@@ -7,6 +7,8 @@ import { ArrowLeft, ExternalLink } from 'lucide-react'
 import PageHeader from '../../components/common/PageHeader.jsx'
 import Tabs from '../../components/common/Tabs.jsx'
 import ChatInterface from '../../components/chat/ChatInterface.jsx'
+import AIActions from '../../components/ai/AIActions.jsx'
+import FlashcardManager from '../../components/flashcards/FlashcardManager.jsx'
 
 
 const DocumentDetailPage = () => {
@@ -83,11 +85,11 @@ const DocumentDetailPage = () => {
   }
 
   const renderAIActions=()=>{
-    return 'renderAIActions'
+    return <AIActions/>
   }
 
   const renderFlashcardsTab=()=>{
-    return 'renderFlashcardsTab'
+    return <FlashcardManager/>
   }
 
   const renderQuizzesTab=()=>{
