@@ -226,7 +226,7 @@ export const chat = async(req,res,next)=>{
     
 )
 
-await ChatHistory.save()
+await chatHistory.save()
 res.status(200).json({
     success:true,
     data:{
