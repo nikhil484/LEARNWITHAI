@@ -89,7 +89,7 @@ const DocumentDetailPage = () => {
   }
 
   const renderFlashcardsTab=()=>{
-    return <FlashcardManager/>
+    return <FlashcardManager documentId={id}/>
   }
 
   const renderQuizzesTab=()=>{

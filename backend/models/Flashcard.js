@@ -31,8 +31,8 @@ const flashcardSchema = new mongoose.Schema({
                 default: null
             },
             reviewCount: {
-                type: Boolean,
-                default: false
+                type:Number,
+                default: 0
             },
             isStarred: {
                 type: Boolean,
