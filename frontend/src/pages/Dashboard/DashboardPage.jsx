@@ -109,14 +109,15 @@ const DashboardPage = () => {
           {[...(dashboardData.recentActivity.documents || []).map(doc=>({
             id:doc._id,
             description:doc.title,
-            timestamp:doc.lastAccessed,
+            timestamp:doc.lastAccessed || doc.createdAt,
             link:`/documents/${doc._id}`,
             type:'document',
           })),
           ...(dashboardData.recentActivity.quizzes || []).map( quiz=>({
             id:quiz._id,
             description:quiz.title,
-            timestamp:quiz.lastAccessed,
+            //timestamp:quiz.lastAccessed,
+            timestamp: quiz.completedAt,
             link:`/quizzes/${quiz._id}`,
             type:'quiz'
           }))]

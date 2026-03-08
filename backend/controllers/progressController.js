@@ -35,9 +35,9 @@ export const getDashboard=async(req,res,next)=>{
      //recent activity
     
      const recentDocuments= await Document.find({userId})
-     .sort({lastAccessed:-1})
+     .sort({lastAccessed:-1,createdAt:-1})
      .limit(5)
-     .select('title fileName lastAccessed status')
+     .select('title fileName lastAccessed  createdAt status')
 
      const recentQuizzes= await Quiz.find({userId})
      .sort({createdAt:-1})
