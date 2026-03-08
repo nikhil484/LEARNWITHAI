@@ -26,7 +26,7 @@ const flashcardSchema = new mongoose.Schema({
                 enum: ['easy', 'medium', 'hard'],
                 default: 'medium'
             },
-            lastReviwed: {
+            lastReviewed: {
                 type: Date,
                 default: null
             },
