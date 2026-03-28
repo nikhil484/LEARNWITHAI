@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-//This line imports body, a validation middleware used to validate and sanitize request body data in Express.
+
 import {
     register,
     login,
