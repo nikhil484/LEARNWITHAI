@@ -107,10 +107,6 @@ https://docs.google.com/document/d/1rRYWx3vycG82SMCqxu75Y5rjP9pK5C0q/edit?usp=dr
 
 🔗 https://learnwithai-three.vercel.app
 
-**Test Credentials:**
-- Email: nikhil@email.com  
-- Password: nikhil  
-
 ---
 ## 👨‍💻 Author
 
