@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+//chat model
 const chatHistorySchema= new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
