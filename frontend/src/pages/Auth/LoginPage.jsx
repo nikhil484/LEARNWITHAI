@@ -71,7 +71,7 @@ const LoginPage = () => {
                 />
               </div>
             </div>
-            {/*Password field*/}
+            {/*Password*/}
             <div className='space-y-2'>
               <label className='block text-xs font-semibold text-slate-700 uppercase tracking-wide'>
                 Password
