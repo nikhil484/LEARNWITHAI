@@ -12,7 +12,7 @@ import upload from '../config/multer.js'
 
 const router=express.Router();
 
-//All routes are protexted
+
 router.use(protect)
 
 //routes
