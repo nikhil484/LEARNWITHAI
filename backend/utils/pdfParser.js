@@ -26,7 +26,7 @@ PDF file on disk
 fs.readFile()
    ↓
 Buffer (raw bytes) The entire PDF file is loaded into memory as a Buffer.
-   ↓               (Raw binary data (bytes),not text,not json , just 0s and 1s )
+   ↓               (Raw binary data (byte),not text,not json , just 0s and 1s )
 Uint8Array
    ↓
 PDF parser
