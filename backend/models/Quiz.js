@@ -1,4 +1,4 @@
-import mongoose, { trusted } from "mongoose";
+import mongoose, { trusted } from "mongoose"
 
 const quizSchema = new mongoose.Schema({
     userId: {
