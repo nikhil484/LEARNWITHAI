@@ -45,13 +45,16 @@ npm install
 Create a `.env` file inside the `backend` folder:
 
 ```env
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URI=mongodb+srv://test:hndDaWau5gyJi3Nf@learnwithai.es8vp9r.mongodb.net/?appName=LearnWithAI
 PORT=8000
-JWT_SECRET=your_jwt_secret
+JWT_SECRET=Docen@2026
 JWT_EXPIRE=7d
 NODE_ENV=development
 MAX_FILE_SIZE=10485760
-GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=AIzaSyCJ90E9kkjjm-SB8YJyfdSDKKH7hUvKr-Q
+CLOUDINARY_CLOUD_NAME=dxj5xyfj6
+CLOUDINARY_API_KEY=574157262225965
+CLOUDINARY_API_SECRET=boJ-MaHLV5_dRpxqY9Xe7qkBKjQ
 ```
 
 Run backend:
@@ -85,7 +88,7 @@ npm run dev
 ## ⚠️ Important Notes
 
 - `.env` file is not included for security reasons  
-- Use your own credentials  
+- Copy .env file from this file and add it locally.
 - Ensure MongoDB and Gemini API are properly configured  
 
 ---
